@@ -1,4 +1,8 @@
+// Hooks
 import React from "react";
+import Image from "next/image";
+
+// Styles
 import classes from "./DetailedCard.module.css";
 
 const DetailedCard = ({ pokemon }) => {
@@ -13,7 +17,13 @@ const DetailedCard = ({ pokemon }) => {
         <div className={classes["container"]}>
             <div className={classes["card"]}>
                 <div className={classes["photo"]}>
-                    <img src={pokemon.imageUrl} alt={pokemon.name} />
+                    <Image
+                        src={pokemon.imageUrl}
+                        alt={pokemon.name}
+                        width={100}
+                        height={100}
+                    />
+
                     <p>{pokemon.name}</p>
                 </div>
                 <div className={classes["stats-container"]}>
