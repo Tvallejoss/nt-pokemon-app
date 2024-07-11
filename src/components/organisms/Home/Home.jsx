@@ -39,13 +39,46 @@ const Home = () => {
         const randomIndex = Math.floor(Math.random() * pokemons.length);
         const randomPoke = pokemons[randomIndex];
         setRandomPokemon(randomPoke);
-        setBattleResult(""); // Reset battle result
+        setBattleResult("");
     };
 
     const handleBattle = () => {
         if (!selectedPokemon || !randomPokemon) return;
 
-        setBattleResult("You win!");
+        let userPokemon = { ...selectedPokemon };
+        let randomPoke = { ...randomPokemon };
+
+        let attacker = userPokemon;
+        let defender = randomPoke;
+
+        if (
+            randomPoke.speed > userPokemon.speed ||
+            (randomPoke.speed === userPokemon.speed &&
+                randomPoke.attack > userPokemon.attack)
+        ) {
+            attacker = randomPoke;
+            defender = userPokemon;
+        }
+
+        // Función para calcular el daño
+        const calculateDamage = (attack, defense) => {
+            const damage = attack - defense;
+            return damage > 0 ? damage : 1;
+        };
+
+        // Loop de la batalla
+        while (attacker.hp > 0 && defender.hp > 0) {
+            const damage = calculateDamage(attacker.attack, defender.defense);
+            defender.hp -= damage;
+            if (defender.hp <= 0) {
+                setBattleResult(`${attacker.name} wins!`);
+                return;
+            }
+            [attacker, defender] = [defender, attacker];
+        }
+
+        // Si sale del bucle sin un ganador 
+        setBattleResult("It's a draw!");
     };
 
     return (
@@ -57,17 +90,15 @@ const Home = () => {
                 <h6>Select your Pokemon</h6>
                 <div className={classes["pokemons"]}>
                     {pokemons.length > 0 ? (
-                        pokemons.map((pokemon) => {
-                            return (
-                                <div
-                                    key={pokemon.id}
-                                    className={classes["pokemon-card"]}
-                                    onClick={() => handleCardClick(pokemon)}
-                                >
-                                    <Card pokemon={pokemon} />
-                                </div>
-                            );
-                        })
+                        pokemons.map((pokemon) => (
+                            <div
+                                key={pokemon.id}
+                                className={classes["pokemon-card"]}
+                                onClick={() => handleCardClick(pokemon)}
+                            >
+                                <Card pokemon={pokemon} />
+                            </div>
+                        ))
                     ) : (
                         <p>No pokemons found.</p>
                     )}
