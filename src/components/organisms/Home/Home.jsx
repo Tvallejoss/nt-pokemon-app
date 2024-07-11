@@ -74,7 +74,13 @@ const Home = () => {
                 </div>
             </div>
             {selectedPokemon && randomPokemon && (
-                <>{battleResult && <p>{battleResult}</p>}</>
+                <>
+                    {battleResult && (
+                        <p className={classes["battle-result"]}>
+                            {battleResult}
+                        </p>
+                    )}
+                </>
             )}
 
             <div className={classes["pokemon-battle-container"]}>
@@ -86,9 +92,7 @@ const Home = () => {
 
                 <div className={classes["battle-section"]}>
                     {selectedPokemon && randomPokemon && (
-                        <>
-                            <button onClick={handleBattle}>Battle</button>
-                        </>
+                        <button onClick={handleBattle}>Start Battle</button>
                     )}
                 </div>
                 {randomPokemon && (

@@ -23,11 +23,10 @@
 
 .pokemon-select {
     width: 100%;
-    height: 30%;
+    height: 25%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-
+    justify-content: space-evenly;
 }
 
 .pokemons {
@@ -45,7 +44,6 @@
     height: 100%;
 }
 
-
 .pokemon-battle-container {
     width: 100%;
     height: 50%;
@@ -56,6 +54,44 @@
 }
 
 .pokemon-battle-card {
-    width: 35%;
-    height: 400px;
+    width: 30%;
+    height: 450px;
+}
+
+.battle-section {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.battle-section button {
+    width: 100%;
+    height: 15%;
+    border: none;
+    background-color: #4d7342;
+    color: #ffffff;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.battle-result {
+    border: 2px solid #000000;
+    background-color: #eaf8fd;
+    width: 97%;
+    height: 5%;
+    color: #000000;
+    font-size: var(--font-size-xl);
+    border-radius: 10px;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1260px) {
+    .container {
+        width: 90%;
+    }
 }
