@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  app:
+    image: nestjs-docker:local
+    container_name: nestjs-docker
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql_db   # Asegúrate de que coincida con el nombre del servicio MySQL
+  mysql_db:
+    image: mysql
+    ports:
+      - "3307:3307"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password_123
+      - MYSQL_DATABASE=pokemon_app
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testuser123
+      - MYSQL_TCP_PORT=3307
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
