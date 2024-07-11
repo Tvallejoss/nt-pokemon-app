@@ -14,7 +14,7 @@ const Card = ({ pokemon }) => {
                 width={100}
                 height={100}
             />
-            <h3>{pokemon.name}</h3>
+            {/* <h3>{pokemon.name}</h3> */}
         </div>
     );
 };
